@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Grid} from './C4'
+import Grid from './C4';
 
 
 ReactDOM.render(
@@ -9,5 +9,6 @@ ReactDOM.render(
     <hr/>
     <Grid/>
   </div>
-    
-)
+  ,
+  document.getElementById('root')
+);

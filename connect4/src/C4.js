@@ -1,14 +1,15 @@
 import React from 'react'
 
-class C4Button extends React.component
+class C4Button extends React.Component
 {
-  render()  {
+  render()  
+  {
     return (
         <button>Yellow</button>
     ); 
   }
 }
-class Grid extends React.component{
+class Grid extends React.Component{
   renderButton(){
     return (
         <C4Button/>
