@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Grid from './C4';
+import C4Button from './C4';
+
 
 
 ReactDOM.render(
@@ -8,7 +10,7 @@ ReactDOM.render(
     <h1>Connect 4 by Brandon Mendoza</h1>
     <hr/>
     <Grid/>
-  </div>
-  ,
+    
+  </div>, 
   document.getElementById('root')
 );
