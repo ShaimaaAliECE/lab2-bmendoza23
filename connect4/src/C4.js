@@ -7,7 +7,7 @@ class C4Button extends React.Component
   { 
     return (
         <button
-          clicked = {this.props.clicked} 
+          disabled    = {this.props.disabled} 
           style       = {this.props.style}
           onClick     = {this.props.onClick}
         >
@@ -47,43 +47,40 @@ class Grid extends React.Component{
     {
       for (let c = 0; c<7; c++)       // Scanning over columns
       {
-        if(board[r][c] === null)
+        if(board[r][c] === null){
           nulls++;
+        }
+        //Board is full if no more null spaces are occupied
+        if (nulls === (6*7)){
+            this.state.boardFull = true;
+        }
       }
     }
 
-    //Board is full if no more null spaces are occupied
-    if (nulls === 0)
-    {
-      this.setState(
-        {boardFull: true}
-        )
-    }
-
     //Scanning columns for wins
-    for(let c = 0; c <7; c++)
-    {
+    for(let c = 0; c <7; c++){
       for (let r = 0; r < 6; r++)
       {
         if (board[r][c] === null)
         {
           verts = 0;
           currentPlayer = null;
-        }
-        else if (board[r][c] === currentPlayer) {
+        } else if (board[r][c] === currentPlayer) {
           verts++;
         } else {
           verts = 1;
           currentPlayer = board[r][c];
         }
+
+        //Checking if there is a vertical win for the player 
+        if(verts >=4) 
+        {
+          this.state.win = true;
+        }
       }
-      //Checking if there is a win for the player 
-      if(verts >=4) 
-      {
-        this.setState({
-          win: true
-        });   
-      }
+      
+
+      
     }
 
     //Scanning rows for wins
@@ -95,20 +92,21 @@ class Grid extends React.Component{
         {
           hors = 0;
           currentPlayer = null;
-        }
-        else if (board[r][c] === currentPlayer) {
+        } else if (board[r][c] === currentPlayer) {
           hors++;
         } else {
           hors = 1;
           currentPlayer = board[r][c];
         }
+
+        //Checking for horizontal win for the player 
+        if(hors >=4) 
+        {
+          this.state.win = true;
+        }
       }
-      if(hors >=4) 
-      {
-        this.setState({
-          win:true
-        });
-      }
+
+      
     } 
   }
 
@@ -125,7 +123,8 @@ class Grid extends React.Component{
             key={r + " " + c}
             //Events that are handled upon button click
             disabled = {this.state.boardFull || this.state.win}
-            onClick  ={(e) => {
+                            
+            onClick  = {(e) => {
               //Switches color to current player
               e.target.style.backgroundColor = this.state.player;
               //Disables ability to click button
@@ -142,12 +141,12 @@ class Grid extends React.Component{
               //Checks if there is a win
               if(this.state.win){
                 //Sends win alert message
-                setTimeout(() => {alert("Game Over! " + this.state.player + " Wins!");}, 100);
+                alert("Game Over! " + this.state.player + " Wins!");
               }
 
               if(this.state.boardFull){
                 //Sends board full alert message
-                setTimeout(() => {alert("Game Over! The there are no more free spaces :(");}, 100);
+                alert("Game Over! The there are no more free spaces :(");
               }
 
               //Change player
