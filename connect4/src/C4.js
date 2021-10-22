@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 
+// Creating C4Button class
 class C4Button extends React.Component
 { 
   render()  
@@ -15,6 +16,7 @@ class C4Button extends React.Component
     ); 
   }
 }
+//Creating Grid Class
 class Grid extends React.Component{
   
   //Grid Constructor
@@ -37,6 +39,7 @@ class Grid extends React.Component{
     };
   }
 
+  //Method to scan the whole game board for a win or the board being full
   boardScan(){
     let board = this.state.gameBoard; // Whole Game Board
     let nulls, hors, verts = 0;       // Tracking count for null, horizontal and vertical spaces
@@ -51,8 +54,8 @@ class Grid extends React.Component{
           nulls++;
         }
         //Board is full if no more null spaces are occupied
-        if (nulls === (6*7)){
-            this.state.boardFull = true;
+        if (nulls === (6*7)){ 
+          this.state.boardFull = true;  //Declare board full
         }
       }
     }
@@ -75,12 +78,9 @@ class Grid extends React.Component{
         //Checking if there is a vertical win for the player 
         if(verts >=4) 
         {
-          this.state.win = true;
+          this.state.win = true;   //Declare win
         }
       }
-      
-
-      
     }
 
     //Scanning rows for wins
@@ -102,7 +102,7 @@ class Grid extends React.Component{
         //Checking for horizontal win for the player 
         if(hors >=4) 
         {
-          this.state.win = true;
+          this.state.win = true;    //Declare win
         }
       }
 
@@ -110,7 +110,8 @@ class Grid extends React.Component{
     } 
   }
 
-  renderButton(){
+  //Render buttons grid
+  renderButtons(){
     
       let btnGrid = [];
       //Render Rows
@@ -168,7 +169,7 @@ class Grid extends React.Component{
   {
     return(
       <div>
-        {this.renderButton()}
+        {this.renderButtons()}
       </div>
     )
   }
